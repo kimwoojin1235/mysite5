@@ -30,9 +30,11 @@ public class UserDao {
 	public UserVo selectUserupdate(int no) {
 		System.out.println("update");
 		return sqlSession.selectOne("user.selectUserupdate", no);
+		
 	}//수정
 	public int update(UserVo userVo) {
 		System.out.println("updateUser");		
+		System.out.println(userVo.toString());
 		return sqlSession.update("user.update", userVo);
 	}
 }

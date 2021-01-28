@@ -24,7 +24,7 @@
 			and password = #{password}
 		]]>
 	</select>
-	
+	<!-- 수정화면에 정보를 뿌리는 용도 -->
 	<select id="selectUserupdate"  parameterType="int" resultType="com.javaex.vo.UserVo">
 	<![CDATA[
 			select  no,
