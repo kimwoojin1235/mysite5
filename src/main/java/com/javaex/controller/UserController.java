@@ -71,14 +71,10 @@ public class UserController {
 	@RequestMapping(value = "/modify", method = {RequestMethod.GET,RequestMethod.POST})
 	public String modify(@ModelAttribute UserVo userVo, HttpSession session) {
 		System.out.println("/user/modify");
-		UserVo authUser = (UserVo)session.getAttribute("authUser");
-		
-		userVo.setNo(authUser.getNo());
-		
-		userDao.update(userVo);
-		
-		authUser.setName(userVo.getName());
-		
+		UserVo authUser = (UserVo)session.getAttribute("authUser");	
+		userVo.setNo(authUser.getNo());	
+		userDao.update(userVo);	
+		authUser.setName(userVo.getName());	
 		return "redirect:/main";
 	}
 	//로그아웃
