@@ -18,13 +18,13 @@ public class GuestService {
 		return guestDao.getList();
 	}
 	public int insert(GuestVo guestVo) {
-		System.out.println(" add");
+		System.out.println("add");
 		
 		return guestDao.guestinsert(guestVo);
 	}
 	
 	public int delete(GuestVo guestVo) {
-		System.out.println(" delete");
+		System.out.println("delete");
 		
 		return guestDao.guestdelete(guestVo);
 	}
