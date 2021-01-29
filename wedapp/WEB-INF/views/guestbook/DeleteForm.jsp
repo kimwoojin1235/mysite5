@@ -46,9 +46,7 @@
             <!-- //content-head -->
 
 			<div id="guestbook">
-			<c:if test="${param.result =='fail'}">
-					<p>비밀번호를 잘못 입력하였습니다. 다시 입력해주세요.</p>
-				</c:if>
+			
 				<form action="${pageContext.request.contextPath }/guest/delete" method="get">
 					<table id="guestDelete">
 						<colgroup>
@@ -63,6 +61,9 @@
 							<td class="text-left"><button type="submit">삭제</button></td>
 							<td><a href="${pageContext.request.contextPath }/">[메인으로 돌아가기]</a></td>
 						</tr>
+						<c:if test="${param.result =='fail'}">
+					<p>비밀번호를 잘못 입력하였습니다. 다시 입력해주세요.</p>
+				</c:if>
 					</table>
 					<input type='hidden' name="" value="">
 				</form>
