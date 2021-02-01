@@ -76,10 +76,10 @@ public class BoardCotroller {
 		}
 		
 		@RequestMapping(value="/delete", method= {RequestMethod.GET, RequestMethod.POST} )
-		public String remove(int no) {
+		public String delete(int no) {
 			System.out.println("delete");
 			
-			boardService.remove(no);
+			boardService.delete(no);
 			
 			return "redirect:/board/list";
 		}

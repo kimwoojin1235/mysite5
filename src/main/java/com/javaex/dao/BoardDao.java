@@ -23,8 +23,7 @@ public class BoardDao {
 		//1개 글 내용
 		public BoardVo select(int no) {
 			System.out.println("BoardDao select");
-			
-			
+
 			return sqlSession.selectOne("board.select",no);
 		}
 		

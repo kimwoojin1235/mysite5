@@ -58,7 +58,7 @@ public class BoardService {
 		}
 		
 		//글 삭제
-		public int remove(int no) {
+		public int delete(int no) {
 			System.out.println("boardService remove");
 			
 			return boardDao.delete(no);
