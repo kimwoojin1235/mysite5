@@ -26,11 +26,12 @@ public class BoardService {
 			return boardDao.selectList();
 			
 		}
-		//카운트 증가
+		//글 가지고 오기
 		public BoardVo read(int no) {
 			System.out.println("boardService read");
 			
 			BoardVo count = boardDao.select(no);
+			boardDao.updatehit(no);
 			
 			return count;
 		}
