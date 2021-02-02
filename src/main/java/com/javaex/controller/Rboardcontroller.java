@@ -34,8 +34,6 @@ public class Rboardcontroller {
 		public String read(@RequestParam("no") int no,
 							Model model) {
 			System.out.println("컨트롤러 read");
-			//게시물 정보 받아옴
-			
 			model.addAttribute("select", rboardService.read(no));
 			
 			return "rboard/read";
@@ -44,7 +42,6 @@ public class Rboardcontroller {
 		@RequestMapping(value="/writeForm", method= {RequestMethod.GET ,RequestMethod.POST})
 		public String writeForm() {
 			System.out.println("컨트롤러 writeForm");
-				
 				
 			return "rboard/writeForm";
 		}
@@ -55,8 +52,6 @@ public class Rboardcontroller {
 		public String write(@ModelAttribute RboardVo rboardVo,HttpSession session) {
 			System.out.println("컨트롤 write");
 			
-			
-			//session은 웹의 개념이라서 controller까지 범위에서 사용하는편이 좋음
 			int no = ((UserVo)session.getAttribute("authUser")).getNo();		
 			rboardVo.setUserno(no);		
 			System.out.println("확인용");
