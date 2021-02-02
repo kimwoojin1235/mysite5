@@ -59,7 +59,7 @@ public class Rboardcontroller {
 			//session은 웹의 개념이라서 controller까지 범위에서 사용하는편이 좋음
 			int no = ((UserVo)session.getAttribute("authUser")).getNo();		
 			rboardVo.setUserno(no);		
-			System.out.println("user_no값이 잘 들어갔는지 확인"+rboardVo);
+			System.out.println("확인용");
 			
 			
 			rboardService.write(rboardVo);
