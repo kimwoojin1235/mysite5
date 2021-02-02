@@ -6,8 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="${pageContext.request.contextPath }/assets/css/mysite.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath }/assets/css/board.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/assets/css/mysite.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/assets/css/board.css" rel="stylesheet" type="text/css">
 
 </head>
 
@@ -15,12 +15,18 @@
 <body>
 	<div id="wrap">
 
+		<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
 		<!-- //header -->
 		<!-- //nav -->
-		<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
 
+		<div id="aside">
+			<h2>게시판</h2>
+			<ul>
+				<li><a href="">일반게시판</a></li>
+				<li><a href="">댓글게시판</a></li>
+			</ul>
+		</div>
 		<!-- //aside -->
-		<c:import url="/WEB-INF/views/include/boardAside.jsp"></c:import>
 
 
 		<div id="content">
@@ -31,7 +37,7 @@
 					<ul>
 						<li>홈</li>
 						<li>게시판</li>
-						<li class="last">댓글게시판</li>
+						<li class="last">일반게시판</li>
 					</ul>
 				</div>
 				<div class="clear"></div>
@@ -40,10 +46,10 @@
 
 			<div id="board">
 				<div id="writeForm">
-					<form action="${pageContext.request.contextPath }/rboard/write" method="post">
+					<form action="${pageContext.request.contextPath}/rboard/write?no=${sessionScope.authUser.no}" method="get">
 						<!-- 제목 -->
 						<div class="form-group">
-							<label class="form-text" for="txt-title">제목</label>
+							<label class="form-text" for="txt-title">제목</label> 
 							<input type="text" id="txt-title" name="title" value="" placeholder="제목을 입력해 주세요">
 						</div>
 
@@ -51,14 +57,8 @@
 						<div class="form-group">
 							<textarea id="txt-content" name="content"></textarea>
 						</div>
-						
-						<c:if test="${parentsPost != null }">
-							<input type="hidden" name="groupNo" value="${parentsPost.groupno }">
-							<input type="hidden" name="orderNo" value="${parentsPost.orderno }">
-							<input type="hidden" name="depth" value="${parentsPost.depth }">
-						</c:if>
 
-						<a id="btn_cancel" href="${pageContext.request.contextPath }/rboard/list">취소</a>
+						<a id="btn_cancel" href="${pageContext.request.contextPath}/rboard/list">취소</a>
 						<button id="btn_add" type="submit">등록</button>
 
 					</form>
@@ -68,11 +68,11 @@
 			</div>
 			<!-- //board -->
 		</div>
-		<!-- //content  -->
-		<div class="clear"></div>
+		<!-- //content  -->    0
+0		<div class="clear"></div>
 
-		<!-- //footer -->
 		<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
+		<!-- //footer -->
 
 	</div>
 	<!-- //wrap -->
