@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="rboard">
+<!-- 게시판 리스트 -->
+	<select id="selectList" resultType="com.javaex.vo.RboardVo">
+		<![CDATA[
+			select  rb.no,
+        			rb.user_no as userno,
+        			rb.title,
+        			rb.content,
+        			rb.hit,
+        			to_char(rb.req_date, 'YYYY-MM-DD HH24:MI:SS') regdate,
+        			rb.group_no groupno,
+        			rb.order_no orderno,
+        			rb.depth,
+        			us.name 
+			from rboard rb left join users us
+			on rb.user_no = us.no
+			order by group_no desc, order_no asc
+		]]>
+	</select>
+	
+	<!-- 게시글 -->
+	<select id="select" parameterType="int" resultType="com.javaex.vo.RboardVo">
+		<![CDATA[
+			select  rb.no,
+        			rb.user_no as userno,
+        			rb.title,
+        			rb.content,
+        			rb.hit,
+        			to_char(rb.req_date, 'YYYY-MM-DD HH24:MI:SS') regdate,
+        			rb.group_no groupno,
+        			rb.order_no orderno,
+        			rb.depth,
+        			us.name 
+			from rboard rb left join users us
+			on rb.user_no = us.no
+			where rb.no = #{no}
+		]]>
+	</select>
+	<!-- 새글 등록 -->
+	<insert id="insert" parameterType="com.javaex.vo.RboardVo">
+		<![CDATA[
+			insert into rboard 
+			values(seq_rboard_id.nextval,
+				   #{userno},
+				   #{title},
+				   #{content},
+				   default,
+				   sysdate,
+				   seq_rboard_id.currval,
+				   1,
+				   0
+			)
+		]]>
+	</insert>
+</mapper>
