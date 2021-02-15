@@ -1,6 +1,8 @@
 package com.javaex.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,34 @@ public class BoardDao {
 			
 			return sqlSession.selectList("board.selectList");
 		}
+		//글전체 가지고 오기(키워드)
+		public List<BoardVo> selectList2(String keyword){
+			System.out.println("BoardDao selectList2");
+			System.out.println("keyword="+keyword);
+			List<BoardVo> boardlist = sqlSession.selectList("board.selectList2",keyword);
+			System.out.println("boardlist="+boardlist);
+			return boardlist;
+		}
+		
+		
+		//글전체 가지고 오기(키워드+페이징)
+		public List<BoardVo> selectList3(String keyword,int startRnum, int endRnum){
+			System.out.println("BoardDao selectList3");
+			//3개의 값을 map으로 묶음
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("keyword", keyword);
+			map.put("startRnum", startRnum);
+			map.put("endRnum", endRnum);
+			System.out.println(map);
+			
+			return sqlSession.selectList("board.selectList3",map);
+		}
+		//전체글 갯수 가지고 오기
+		public int selectTotalCut(String keyword) {
+			System.out.println("BoardDao selectTotalCut()");
+			return sqlSession.selectOne("board.selectTotalCut",keyword);
+		}
+		
 		//1개 글 내용
 		public BoardVo select(int no) {
 			System.out.println("BoardDao select");
@@ -54,4 +84,5 @@ public class BoardDao {
 			
 			return sqlSession.delete("board.delete", no);
 		}
+		
 }

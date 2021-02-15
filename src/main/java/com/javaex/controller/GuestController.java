@@ -22,7 +22,7 @@ public class GuestController {
 		model.addAttribute("glist",gservice.addList());
 		return "/guestbook/AddList";
 	}
-	@RequestMapping(value = "/write ",method = {RequestMethod.GET,RequestMethod.POST})
+	@RequestMapping(value = "/write",method = {RequestMethod.GET,RequestMethod.POST})
 	public String write(@ModelAttribute GuestVo guestVo) {
 		//@ModelAttribute를 사용하여서 vo의 값을가져온뒤 입력을함
 		//리스트와 같이 있있어Model을 사용할 필요x
@@ -45,10 +45,16 @@ public class GuestController {
 		//model은 포워드만을 하기 위한 것이므로 리다이렉트를 하는 이런경우에는 어울리지 않는다.
 		int delete = gservice.delete(guestVo);
 		if(delete==1) {	//성공
-			return "redirect:/guest/AddList";
+			return "redirect:/guest/list";
 		}else {//실패
 			//실패시에는 삭제창으로 리다이렉트 시키는 것이 나은 방식이다.
-			return "redirect:/guest/DeleteForm?result=fail&no="+guestVo.getNo();
+			return "redirect:/guest/deleteForm?result=fail&no="+guestVo.getNo();
 		}
+	}
+	//
+	@RequestMapping(value = "/ajaxList",method = {RequestMethod.GET,RequestMethod.POST})
+	public String ajaxList() {
+		System.out.println("guestcotroller ajaxList");
+		return "guestbook/ajaxList";
 	}
 }

@@ -10,7 +10,7 @@ public class BoardVo {
 	private String name;
 	public BoardVo() {
 	}
-	
+
 	public BoardVo(int userno) {
 		super();
 		this.userno = userno;
@@ -20,6 +20,7 @@ public class BoardVo {
 		this.title = title;
 		this.content = content;
 	}
+
 	public BoardVo(String title, String content, int hit, String egdate, String name) {
 		this.title = title;
 		this.content = content;
@@ -27,6 +28,7 @@ public class BoardVo {
 		this.egdate = egdate;
 		this.name = name;
 	}
+
 	public BoardVo(int no, String title, String content) {
 		super();
 		this.no = no;
@@ -57,42 +59,55 @@ public class BoardVo {
 	public int getNo() {
 		return no;
 	}
+
 	public void setNo(int no) {
 		this.no = no;
 	}
+
 	public String getTitle() {
 		return title;
 	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
+
 	public String getContent() {
 		return content;
 	}
+
 	public void setContent(String content) {
 		this.content = content;
 	}
+
 	public int getHit() {
 		return hit;
 	}
+
 	public void setHit(int hit) {
 		this.hit = hit;
 	}
+
 	public String getEgdate() {
 		return egdate;
 	}
+
 	public void setEgdate(String egdate) {
 		this.egdate = egdate;
 	}
+
 	public int getUserno() {
 		return userno;
 	}
+
 	public void setUserno(int userno) {
 		this.userno = userno;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -102,5 +117,5 @@ public class BoardVo {
 		return "BoardVo [no=" + no + ", title=" + title + ", content=" + content + ", hit=" + hit + ", egdate=" + egdate
 				+ ", userno=" + userno + ", name=" + name + "]";
 	}
-	
+
 }

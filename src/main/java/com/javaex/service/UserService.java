@@ -31,4 +31,17 @@ public class UserService {
 		//다오에게 값을 넘기고 있다.
 		return userDao.update(userVo);
 	}
+	//회원가입-아이디체크
+	public String idcheck(String id) {
+		System.out.println("uderService idcheck = "+id);
+		UserVo userVo = userDao.selectOne(id);
+		String result="";
+		if(userVo == null) {
+			
+			result = "can";
+		}else {
+			result ="cant";
+		}
+		return result;
+	}
 }

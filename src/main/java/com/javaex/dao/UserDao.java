@@ -37,4 +37,10 @@ public class UserDao {
 		System.out.println(userVo.toString());
 		return sqlSession.update("user.update", userVo);
 	}
+	//회원가입 아이디 체크
+	public UserVo selectOne(String id) {
+		System.out.println("selectOne="+id);	
+		UserVo userVo = sqlSession.selectOne("user.selectById",id);
+		return userVo;	
+	}
 }

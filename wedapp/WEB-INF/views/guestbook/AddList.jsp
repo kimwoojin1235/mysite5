@@ -15,9 +15,7 @@
 	<div id="wrap">
 
 		<div id="header">
-			<h1>
-				<a href="">MySite</a>
-			</h1>
+			
 
 			<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
 		<!-- //nav -->

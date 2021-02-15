@@ -36,8 +36,7 @@
 			where no = #{no}
 		]]>
 	</select>
-	
-	
+	<!-- 유저정보 업데이트 -->
 	<update id="update" parameterType="com.javaex.vo.UserVo" >
 	<![CDATA[
 			UPDATE users
@@ -47,5 +46,20 @@
 		    WHERE no = #{no}
 		]]>
 	</update>
+	<!-- 회원정보 가지고 오기(id)회원가입 아이디체크 -->
+	<!-- parameterType=받아오는 값의 타입 -->
+	<select id="selectById" parameterType="string" resultType="com.javaex.vo.UserVo">
+	<![CDATA[
+			select  no,
+        			id,
+        			name,
+        			gender
+			from users
+			where id = #{id}
+	]]>
+	</select>
+	
+	
+	
 	
 </mapper>

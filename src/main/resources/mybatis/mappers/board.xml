@@ -12,12 +12,81 @@
         			to_char(bo.eg_date, 'YYYY-MM-DD HH24:MI:SS') egdate,
         			bo.user_no as userno,
         			us.name as name
-			from board bo left join users us
-			on bo.user_no = us.no
-			order by bo.no asc
+			from board bo , users us
+			Where bo.user_no = us.no
+			order by bo.no desc
 		]]>
 	</select>
 	
+	
+	<!-- 게시판 리스트(검색추가) -->
+	<select id="selectList2" parameterType="string" resultType="com.javaex.vo.BoardVo">
+		<![CDATA[
+			select  bo.no,
+			        bo.title,
+			        bo.hit,
+			        to_char(bo.eg_date, 'YYYY-MM-DD HH24:MI:SS') egdate,
+			        bo.user_no as userno,
+			        us.name as name
+			from board bo , users us
+			Where bo.user_no = us.no
+		]]>
+		<if test="value != null and value != '' ">
+			AND title like '%' || #{keyword} || '%'
+		</if>
+		<![CDATA[
+			order by bo.no desc
+		]]>
+	</select>
+	
+	
+	<!-- 게시판 리스트(검색추가) -->
+	<select id="selectList3" parameterType="map" resultType="com.javaex.vo.BoardVo">
+		<![CDATA[
+		SELECT  r.ro,
+		        r.no,
+		        r.title,
+		        r.hit,
+		        r.egdate,
+		        r.userno,
+		        r.name
+		FROM (SELECT  ROWNUM ro,
+				       o.no,
+				       o.title,
+				       o.hit,
+				       o.egdate,
+				       o.userno,
+				       o.name
+ 			FROM (select  bo.no,
+			                bo.title,
+			                bo.hit,
+			                to_char(bo.eg_date, 'YYYY-MM-DD HH24:MI:SS') egdate,
+			                bo.user_no as userno,
+			                us.name as name
+						    from board bo , users us
+						    Where bo.user_no = us.no
+								]]>
+						    <if test="value != null and value != '' ">
+							AND title like '%' || #{keyword} || '%'
+							</if>
+				<![CDATA[
+				order by bo.no desc)o )r
+				WHERE r.ro >=#{startRnum}
+				AND r.ro<=#{endRnum}
+				]]>
+	</select>
+	
+	<!-- 전체글 갯수 가지고 오기result=가지고 오는값  -->
+	<select id="selectTotalCut" parameterType="string" resultType="int">
+		<![CDATA[
+		SELECT count(*)
+		FROM board b,users u
+		WHERE b.user_no=u.no
+		]]>
+		<if test="value != null and value != '' ">
+			AND title like '%' || #{keyword} || '%'
+		</if>
+	</select>
 	<!-- 게시글 -->
 	<select id="select" parameterType="int" resultType="com.javaex.vo.BoardVo">
 		<![CDATA[
@@ -34,6 +103,7 @@
 		]]>
 	</select>
 	
+
 	<!-- 조회수 증가 -->
 	<update id="updatehit" parameterType="int">
 		<![CDATA[
@@ -42,7 +112,8 @@
 			where no = #{no}
 		]]>
 	</update>
-	
+
+
 	<!-- 글 등록 -->
 	<insert id="insert" parameterType="com.javaex.vo.BoardVo">
 		<![CDATA[
@@ -56,7 +127,7 @@
 			)
 		]]>
 	</insert>
-	
+
 	<!-- 글 수정 -->
 	<update id="update" parameterType="com.javaex.vo.BoardVo">
 		<![CDATA[
@@ -66,7 +137,7 @@
 			where no = #{no}
 		]]>
 	</update>
-	
+
 	<!-- 글 삭제 -->
 	<delete id="delete" parameterType="int">
 		<![CDATA[

@@ -8,6 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.annotation.RequestScope;
 
 import com.javaex.dao.UserDao;
 import com.javaex.service.UserService;
@@ -50,7 +53,6 @@ public class UserController {
 			return"redirect:/main";
 		}else {
 			//로그인 실패
-			//로그인 -->result = fail
 			return "redirect:/user/loginForm?result=fail";
 		}
 		
@@ -97,6 +99,22 @@ public class UserController {
 		session.removeAttribute("authUser");
 		session.invalidate();
 		return "redirect:/main";
+	}
+	//회원가입에서 id체크
+	@ResponseBody//리턴형을 포워드가 아니라데이터로만 본다.
+	@RequestMapping(value ="/idcheck", method = {RequestMethod.GET,RequestMethod.POST})
+	public String idcheck(@RequestParam("id") String id) {//@ModelAttributet 는 양이 많아지면 사용
+		//패스워드는 테스트용
+		System.out.println("/user/idcheck");
+		System.out.println("id="+id);
+		
+		String result = userservice.idcheck(id);
+		System.out.println(result);
+	    return result;
+		//return "redirect:/user/joinForm?result="+result;
+		//return result; 
+		// "result"로 리턴을 하면 /WEB-INF/views/result.jsp를 찾게된다.즉 포워드를 하게됨
+		//@ResponseBody-->respons에 body영역의 데이터만 보냄
 	}
 	
 }

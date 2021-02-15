@@ -14,9 +14,7 @@
 	<div id="wrap">
 
 		<div id="header">
-			<h1>
-				<a href="">MySite</a>
-			</h1>
+
 
 			<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
 		<!-- //nav -->
@@ -59,13 +57,13 @@
 							<td>비밀번호</td>
 							<td><input type="password" name="password"></td>
 							<td class="text-left"><button type="submit">삭제</button></td>
-							<td><a href="${pageContext.request.contextPath }/">[메인으로 돌아가기]</a></td>
+							<td><a href="${pageContext.request.contextPath }/guest/list">[메인으로 돌아가기]</a></td>
 						</tr>
 						<c:if test="${param.result =='fail'}">
 					<p>비밀번호를 잘못 입력하였습니다. 다시 입력해주세요.</p>
 				</c:if>
 					</table>
-					<input type='hidden' name="" value="">
+					<input type='hidden' name="no" value="${param.no}">
 				</form>
 				
 			</div>
